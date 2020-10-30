@@ -19,6 +19,11 @@
 #ifndef _GPRECOMPILED_H_
 #define _GPRECOMPILED_H_
 
+// Export definition
 #define GLIB_EXPORT
+
+//STL includes
+#include <stdexcept>
+#include <utility>
 
 #endif //_GPRECOMPILED_H_

@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'ProjectA'
-include 'src'
+include 'geometry'
