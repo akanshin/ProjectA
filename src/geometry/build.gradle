@@ -1,0 +1,20 @@
+// geometry library
+
+plugins {
+    id 'cpp-library'
+    id 'cpp-unit-test'
+}
+
+library {
+    source.from file('src/main/cpp')
+    privateHeaders.from file('src/main/headers')
+    publicHeaders.from file('include')
+
+    linkage = [Linkage.SHARED]
+
+    targetMachines = [
+        machines.linux.x86_64,
+        machines.windows.x86_64,
+        machines.macOS.x86_64
+    ]
+}
