@@ -29,28 +29,28 @@ namespace glib
  * @brief Returns true if input numbers are equal within tolerance
  * @param d1 - first number
  * @param d2 - second number
- * @param tolerance - length tolerance
+ * @param tolerance - tolerance
  * @return true if input numbers are equal within tolerance, otherwise false
  */
-GLIB_API bool equal(double d1, double d2, double tolerance = GTolerance::lengthTol());
+GLIB_API bool equal(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
 /**
  * @brief Returns true if the first number is less than the second within tolerance
  * @param d1 - first number
  * @param d2 - second number
- * @param tolerance - length tolerance
+ * @param tolerance - tolerance
  * @return true if the first number is less than the second within tolerance, otherwise false
  */
-GLIB_API bool less(double d1, double d2, double tolerance = GTolerance::lengthTol());
+GLIB_API bool less(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
 /**
  * @brief Returns true if the first number is greater than the second within tolerance
  * @param d1 - first number
  * @param d2 - second number
- * @param tolerance - length tolerance
+ * @param tolerance - tolerance
  * @return true if the first number is greater than the second within tolerance, otherwise false
  */
-GLIB_API bool greater(double d1, double d2, double tolerance = GTolerance::lengthTol());
+GLIB_API bool greater(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
 } //namespace glib
 

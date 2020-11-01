@@ -198,6 +198,13 @@ public:
     bool perpendicular(const GVector3D & v, double tolerance = GTolerance::angularTol()) const;
 
     /**
+     * @brief operator =
+     * @param v - vector
+     * @return reference to this vector object
+     */
+    GVector3D & operator=(const GVector3D & v);
+
+    /**
      * @brief Adds input vector coordinates
      * @param v - vector
      * @return Reference to this vector object

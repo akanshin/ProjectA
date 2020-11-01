@@ -24,6 +24,12 @@
 namespace glib
 {
 
+const GPoint3D & GPoint3D::origin()
+{
+    static GPoint3D s_origin;
+    return s_origin;
+}
+
 GPoint3D::GPoint3D()
     : m_x{ 0 }, m_y{ 0 }, m_z{ 0 }
 {}

@@ -36,6 +36,12 @@ class GLIB_API GPoint3D
 {
 public:
     /**
+     * @return World coordinate system origin (0.0, 0.0, 0.0)
+     */
+    GLIB_API static const GPoint3D & origin();
+
+public:
+    /**
      * @brief Initializes zero point.
      */
     GPoint3D();
@@ -133,6 +139,13 @@ public:
      * @throws std::invalid_argument
      */
     double & operator[](std::size_t coordIdx);
+
+    /**
+     * @brief operator =
+     * @param pt - point
+     * @return reference to this point object
+     */
+    GPoint3D & operator=(const GPoint3D & pt);
 
     /**
      * @brief Adds input point coordinates
