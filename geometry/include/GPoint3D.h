@@ -20,6 +20,7 @@
 #define _GPOINT3D_H_
 
 #include "GExports.h"
+#include "GTolerance.h"
 
 namespace glib
 {
@@ -49,7 +50,7 @@ public:
      * @brief Move constructor
      * @param other
      */
-    GPoint3D(GPoint3D && other);
+    GPoint3D(GPoint3D && other) noexcept;
 
     /**
      * @brief Initializes point with specified coordinates
@@ -110,6 +111,14 @@ public:
     void set(double newX, double newY, double newZ);
 
     /**
+     * @brief Returns true if this point equals to given within tolerance
+     * @param pt - point to check equality
+     * @param tolerance - length tolerance
+     * @return true if this point equals to given within tolerance, otherwise false
+     */
+    bool equals(const GPoint3D & pt, double tolerance = GTolerance::lengthTol()) const;
+
+    /**
      * @brief operator [] for read only access
      * @param coordIdx - index of coordinate [0-2]
      * @return coordinate value
@@ -161,8 +170,48 @@ public:
     GPoint3D & operator*=(const GMatrix & m);
 
 private:
-    double m_x, m_y, m_z;
+    double m_x{0}, m_y{0}, m_z{0};
 };
+
+/**
+ * @brief Returns vector from pt2 to pt1
+ * @param pt1 - first point
+ * @param pt2 - second point
+ * @return vector from pt2 to pt1
+ */
+GLIB_API GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2);
+
+/**
+ * @brief Returns point which is a sum of given points coordinates
+ * @param pt1 - first point
+ * @param pt2 - second point
+ * @return point which is a summary of given points coordinates
+ */
+GLIB_API GPoint3D operator+(const GPoint3D & pt1, const GPoint3D & pt2);
+
+/**
+ * @brief Returns point which is shifted from given point by given vector
+ * @param pt - point
+ * @param v - vector
+ * @return point which is shifted from given point by given vector
+ */
+GLIB_API GPoint3D operator+(const GPoint3D & pt, const GVector3D & v);
+
+/**
+ * @brief Returns point which is shifted from given point by given vector
+ * @param v - vector
+ * @param pt - point
+ * @return point which is shifted from given point by given vector
+ */
+GLIB_API GPoint3D operator+(const GVector3D & v, const GPoint3D & pt);
+
+/**
+ * @brief Returns point which is shifted from given point by given vector in opposite way
+ * @param pt - point
+ * @param v - vector
+ * @return point which is shifted from given point by given vector in opposite way
+ */
+GLIB_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
 
 } //namespace glib
 

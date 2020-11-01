@@ -18,6 +18,8 @@
 
 #include "GPrecompiled.h"
 #include "GPoint3D.h"
+#include "GVector3D.h"
+#include "GUtils.h"
 
 namespace glib
 {
@@ -27,7 +29,8 @@ GPoint3D::GPoint3D()
 {}
 
 GPoint3D::GPoint3D(const GPoint3D & other) = default;
-GPoint3D::GPoint3D(GPoint3D && other) = default;
+
+GPoint3D::GPoint3D(GPoint3D && other) noexcept = default;
 
 GPoint3D::GPoint3D(double x, double y, double z)
     : m_x{ x }, m_y{ y }, m_z{ z }
@@ -64,9 +67,7 @@ double GPoint3D::z() const
     return m_z;
 }
 
-void GPoint3D::setZ(double
-#include "GPoint3D.h"
- newZ)
+void GPoint3D::setZ(double newZ)
 {
     m_z = newZ;
 }
@@ -76,6 +77,15 @@ void GPoint3D::set(double newX, double newY, double newZ)
     m_x = newX;
     m_y = newY;
     m_z = newZ;
+}
+
+bool GPoint3D::equals(const GPoint3D & pt, double tolerance /*= GTolerance::lengthTol()*/) const
+{
+    const GPoint3D & rthis = *this;
+    for (std::size_t idx = 0; idx < 3; ++idx)
+        if (!equal(rthis[idx], pt[idx], tolerance))
+            return false;
+    return true;
 }
 
 double GPoint3D::operator[](std::size_t coordIdx) const
@@ -120,20 +130,49 @@ GPoint3D & GPoint3D::operator-=(const GPoint3D & pt)
 
 GPoint3D & GPoint3D::operator+=(const GVector3D & v)
 {
-    // TODO implement
-    throw std::runtime_error("not implemented");
+    m_x += v.x();
+    m_y += v.y();
+    m_z += v.z();
+    return *this;
 }
 
 GPoint3D & GPoint3D::operator-=(const GVector3D & v)
 {
-    // TODO implement
-    throw std::runtime_error("not implemented");
+    m_x -= v.x();
+    m_y -= v.y();
+    m_z -= v.z();
+    return *this;
 }
 
 GPoint3D & GPoint3D::operator*=(const GMatrix & m)
 {
     // TODO implement
     throw std::runtime_error("not implemented");
+}
+
+GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2)
+{
+    return GVector3D(pt1.x() - pt2.x(), pt1.y() - pt2.y(), pt1.z() - pt2.z());
+}
+
+GPoint3D operator+(const GPoint3D & pt1, const GPoint3D & pt2)
+{
+    return GPoint3D(pt1.x() + pt2.x(), pt1.y() + pt2.y(), pt1.z() + pt2.z());
+}
+
+GPoint3D operator+(const GPoint3D & pt, const GVector3D & v)
+{
+    return GPoint3D(pt.x() + v.x(), pt.y() + v.y(), pt.z() + v.z());
+}
+
+GPoint3D operator+(const GVector3D & v, const GPoint3D & pt)
+{
+    return GPoint3D(pt.x() + v.x(), pt.y() + v.y(), pt.z() + v.z());
+}
+
+GPoint3D operator-(const GPoint3D & pt, const GVector3D & v)
+{
+    return GPoint3D(pt.x() - v.x(), pt.y() - v.y(), pt.z() - v.z());
 }
 
 } //namespace glib

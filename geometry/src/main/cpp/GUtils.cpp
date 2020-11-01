@@ -16,15 +16,26 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#ifndef _GPRECOMPILED_H_
-#define _GPRECOMPILED_H_
+#include "GPrecompiled.h"
+#include "GUtils.h"
 
-// Export definition
-#define GLIB_EXPORT
+namespace glib
+{
 
-//STL includes
-#include <cmath>
-#include <stdexcept>
-#include <utility>
+bool equal(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    double diff = d1 - d2;
+    return -tolerance < diff && diff > tolerance;
+}
 
-#endif //_GPRECOMPILED_H_
+bool less(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    return d1 < d2 - tolerance;
+}
+
+bool greater(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    return d1 > d2 + tolerance;
+}
+
+} //namespace glib
