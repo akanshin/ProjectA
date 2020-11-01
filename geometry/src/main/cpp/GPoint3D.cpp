@@ -19,6 +19,7 @@
 #include "GPrecompiled.h"
 #include "GPoint3D.h"
 #include "GVector3D.h"
+#include "GMatrix.h"
 #include "GUtils.h"
 
 namespace glib
@@ -45,6 +46,12 @@ GPoint3D::GPoint3D(double x, double y, double z)
 GPoint3D::GPoint3D(double * pCoords)
     : m_x{ *(pCoords++) }, m_y{ *(pCoords++) }, m_z{ *pCoords }
 {}
+
+GPoint3D::GPoint3D(std::initializer_list<double> l)
+{
+    auto it = l.begin();
+    set(*it, *(it + 1), *(it + 2));
+}
 
 GPoint3D::~GPoint3D() = default;
 
@@ -118,6 +125,11 @@ double & GPoint3D::operator[](std::size_t coordIdx)
     throw std::invalid_argument("GPoint3D: index out of range");
 }
 
+GPoint3D & GPoint3D::operator=(const GPoint3D & pt)
+{
+    set(pt[0], pt[1], pt[2]);
+}
+
 GPoint3D & GPoint3D::operator+=(const GPoint3D & pt)
 {
     m_x += pt.m_x;
@@ -152,8 +164,16 @@ GPoint3D & GPoint3D::operator-=(const GVector3D & v)
 
 GPoint3D & GPoint3D::operator*=(const GMatrix & m)
 {
-    // TODO implement
-    throw std::runtime_error("not implemented");
+    double x = m(0, 0) * m_x + m(1, 0) * m_y + m(2, 0) * m_z + m(3, 0);
+    double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z + m(3, 1);
+    double z = m(0, 2) * m_x + m(1, 2) * m_y + m(2, 2) * m_z + m(3, 2);
+    set(x, y, z);
+    return *this;
+}
+
+GVector3D GPoint3D::asVector() const
+{
+    return GVector3D(m_x, m_y, m_z);
 }
 
 GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2)
@@ -179,6 +199,13 @@ GPoint3D operator+(const GVector3D & v, const GPoint3D & pt)
 GPoint3D operator-(const GPoint3D & pt, const GVector3D & v)
 {
     return GPoint3D(pt.x() - v.x(), pt.y() - v.y(), pt.z() - v.z());
+}
+
+GPoint3D operator*(const GMatrix & m, const GPoint3D & pt)
+{
+    GPoint3D res = pt;
+    res *= m;
+    return res;
 }
 
 } //namespace glib

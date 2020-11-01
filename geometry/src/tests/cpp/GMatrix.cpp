@@ -53,9 +53,10 @@ GMatrix::GMatrix(const GPoint3D &o, const GVector3D &x, const GVector3D &y, cons
 
 GMatrix::~GMatrix() = default;
 
-GMatrix &GMatrix::operator=(const GMatrix &m)
+GMatrix & GMatrix::operator=(const GMatrix &m)
 {
     std::memcpy(m_pData, m.m_pData, 16 * sizeof(double));
+    return *this;
 }
 
 void GMatrix::setIdentity()
@@ -182,44 +183,79 @@ GMatrix GMatrix::translation(const GVector3D & v)
 
 GMatrix GMatrix::rotation(double angle, const GVector3D &axis, const GPoint3D &center)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    double cos = std::cos(angle);
+    double sin = std::sin(angle);
+    return { cos + axis[0] * axis[0] * (1.0 - cos),
+             axis[0] * axis[1] * (1.0 - cos) + axis[2] * sin,
+             axis[0] * axis[2] * (1.0 - cos) - axis[1] * sin,
+             0.0,
+             axis[0] * axis[1] * (1.0 - cos) - axis[2] * sin,
+             cos + axis[1] * axis[1] * (1.0 - cos),
+             axis[1] * axis[2] * (1.0 - cos) + axis[0] * sin,
+             0.0,
+             axis[0] * axis[2] * (1.0 - cos) + axis[1] * sin,
+             axis[1] * axis[2] * (1.0 - cos) - axis[0] * sin,
+             cos + axis[2] * axis[2] * (1.0 - cos),
+             0.0,
+             center[0], center[1], center[2], 1.0 };
 }
 
 GMatrix GMatrix::scale(double scale, const GPoint3D &base)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    return {   scale,     0.0,     0.0, 0.0,
+                 0.0,   scale,     0.0, 0.0,
+                 0.0,     0.0,   scale, 0.0,
+             base[0], base[1], base[2], 1.0 };
 }
 
 GMatrix GMatrix::scale(double scaleX, double scaleY, double scaleZ, const GPoint3D &base)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    return {  scaleX,     0.0,     0.0, 0.0,
+                 0.0,  scaleY,     0.0, 0.0,
+                 0.0,     0.0,  scaleZ, 0.0,
+             base[0], base[1], base[2], 1.0 };
 }
 
 GMatrix GMatrix::scale(double scale, const GVector3D &direction, const GPoint3D &base)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    return { scale * direction[0],                  0.0,                  0.0, 0.0,
+                              0.0, scale * direction[1],                  0.0, 0.0,
+                              0.0,                  0.0, scale * direction[2], 0.0,
+                          base[0],              base[1],              base[2], 1.0 };
 }
 
 GMatrix GMatrix::mirror(const GPoint3D &base, const GVector3D &direction)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    GVector3D n = std::move(direction.normalize());
+    double coef = 2 * (base[0] * n[0] + base[1] * n[1] + base[2] * n[2]);
+    return { 1.0 - 2.0 * n[0] * n[0],            -n[0] * n[0],            -n[0] * n[2], 0.0,
+                        -n[0] * n[0], 1.0 - 2.0 * n[1] * n[1],            -n[1] * n[2], 0.0,
+                        -n[0] * n[2],            -n[1] * n[2], 1.0 - 2.0 * n[2] * n[2], 0.0,
+                         n[0] * coef,             n[1] * coef,             n[2] * coef, 1.0 };
 }
 
 GMatrix GMatrix::projection(const GPoint3D &plnPoint, const GVector3D &plnNormal, const GVector3D &prjDir)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    GVector3D n = std::move(plnNormal.normalize());
+    GVector3D udir = std::move(prjDir.normalize());
+
+    const double coef1 = 1.0 / (n % udir);
+    const double coef2 = (n % plnPoint.asVector()) * coef1;
+
+    return { 1.0 - udir[0] * n[0] * coef1,      -udir[0] * n[1] * coef1,      -udir[0] * n[2] * coef1, 0.0,
+                  -udir[1] * n[0] * coef1, 1.0 - udir[1] * n[1] * coef1,      -udir[1] * n[2] * coef1, 0.0,
+                  -udir[2] * n[0] * coef1,      -udir[2] * n[1] * coef1, 1.0 - udir[2] * n[2] * coef1, 0.0,
+                          udir[0] * coef2,              udir[1] * coef2,              udir[2] * coef2, 1.0 };
 }
 
 GMatrix GMatrix::projection(const GPoint3D &plnPoint, const GVector3D &plnNormal)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    GVector3D n = std::move(plnNormal.normalize());
+    const double coef = n % plnPoint.asVector();
+    return { 1.0 - n[0] * n[0],      -n[0] * n[1],      -n[0] * n[2], 0.0,
+                  -n[0] * n[1], 1.0 - n[1] * n[1],      -n[1] * n[2], 0.0,
+                  -n[0] * n[2],      -n[1] * n[2], 1.0 - n[2] * n[2], 0.0,
+                   n[0] * coef,       n[1] * coef,       n[2] * coef, 1.0 };
 }
 
 GMatrix operator*(const GMatrix & m1, const GMatrix & m2)

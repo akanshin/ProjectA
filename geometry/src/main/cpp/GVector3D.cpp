@@ -18,6 +18,7 @@
 
 #include "GPrecompiled.h"
 #include "GVector3D.h"
+#include "GMatrix.h"
 #include "GUtils.h"
 
 namespace glib
@@ -38,6 +39,12 @@ GVector3D::GVector3D(double x, double y, double z)
 GVector3D::GVector3D(double * pCoords)
     : m_x{ *(pCoords++) }, m_y{ *(pCoords++) }, m_z{ *pCoords }
 {}
+
+GVector3D::GVector3D(std::initializer_list<double> l)
+{
+    auto it = l.begin();
+    set(*it, *(it + 1), *(it + 2));
+}
 
 GVector3D::~GVector3D() = default;
 
@@ -126,6 +133,13 @@ GVector3D & GVector3D::normalize()
     return *this;
 }
 
+GVector3D GVector3D::normalize() const
+{
+    GVector3D res(*this);
+    res.normalize();
+    return res;
+}
+
 bool GVector3D::equals(const GVector3D & v, double tolerance /*= GTolerance::lengthTol()*/) const
 {
     const GVector3D & rthis = *this;
@@ -157,6 +171,11 @@ bool GVector3D::perpendicular(const GVector3D & v, double tolerance /*= GToleran
 {
     double cosAngle = (*this % v) / (length() * v.length());
     return equal(cosAngle, 0.0, tolerance);
+}
+
+GVector3D & GVector3D::operator=(const GVector3D & v)
+{
+    set(v[0], v[1], v[2]);
 }
 
 GVector3D & GVector3D::operator+=(const GVector3D & v)
@@ -195,8 +214,10 @@ GVector3D & GVector3D::operator/=(double scalar)
 
 GVector3D & GVector3D::operator*=(const GMatrix & m)
 {
-    // TODO implement
-    throw std::runtime_error("Not implemented");
+    double x = m(0, 0) * m_x + m(1, 0) * m_y + m(2, 0) * m_z;
+    double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z;
+    double z = m(0, 2) * m_x + m(1, 2) * m_y + m(2, 2) * m_z;
+    set(x, y, z);
 }
 
 double operator%(const GVector3D & v1, const GVector3D & v2)
@@ -207,6 +228,13 @@ double operator%(const GVector3D & v1, const GVector3D & v2)
 GVector3D operator*(const GVector3D & v1, const GVector3D & v2)
 {
     return GVector3D(v1[1] * v2[2], v1[2] * v2[0], v1[0] * v2[1]);
+}
+
+GVector3D operator*(const GMatrix & m, const GVector3D & v)
+{
+    GVector3D res;
+    res *= m;
+    return res;
 }
 
 } //namespace glib

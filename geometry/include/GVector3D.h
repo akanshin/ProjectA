@@ -66,6 +66,11 @@ public:
      */
     explicit GVector3D(double * pCoords);
 
+    /**
+     * @brief Initializes vector by initializer list
+     */
+    GVector3D(std::initializer_list<double>);
+
     /** No doc */
     ~GVector3D();
 
@@ -152,6 +157,12 @@ public:
      * @throws std::logic_error
      */
     GVector3D & normalize();
+
+    /**
+     * @brief Returns normalized copy of this vector
+     * @return normalized copy of this vector
+     */
+    GVector3D normalize() const;
 
     /**
      * @brief Returns true if this vector is equal to given within tolerance.
@@ -266,6 +277,14 @@ GLIB_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
  * @return a sum of given vectors
  */
 GLIB_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
+
+/**
+ * @brief Returns transformed copy of given vector
+ * @param m - transformation matrix
+ * @param v - vector to transform
+ * @return transformed copy of given vector
+ */
+GLIB_API GVector3D operator*(const GMatrix & m, const GVector3D & v);
 
 } //namespace glib
 

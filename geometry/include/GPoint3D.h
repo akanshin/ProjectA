@@ -72,6 +72,11 @@ public:
      */
     explicit GPoint3D(double * pCoords);
 
+    /**
+     * @brief Initializes point by initializer list
+     */
+    GPoint3D(std::initializer_list<double>);
+
     /** No doc */
     ~GPoint3D();
 
@@ -182,6 +187,12 @@ public:
      */
     GPoint3D & operator*=(const GMatrix & m);
 
+    /**
+     * @brief Returns vector with the same coordinates
+     * @return vector with the same coordinates
+     */
+    GVector3D asVector() const;
+
 private:
     double m_x{0}, m_y{0}, m_z{0};
 };
@@ -225,6 +236,14 @@ GLIB_API GPoint3D operator+(const GVector3D & v, const GPoint3D & pt);
  * @return point which is shifted from given point by given vector in opposite way
  */
 GLIB_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
+
+/**
+ * @brief Returns transformed copy of given point
+ * @param m - transformation matrix
+ * @param pt - point to transform
+ * @return transformed copy of given point
+ */
+GLIB_API GPoint3D operator*(const GMatrix & m, const GPoint3D & pt);
 
 } //namespace glib
 
