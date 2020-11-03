@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'ProjectA'
-include 'geometry'
+include 'sglib'

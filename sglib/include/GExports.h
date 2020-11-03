@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,26 +16,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#include "GPrecompiled.h"
-#include "GUtils.h"
+#ifndef _GEXPORTS_H_
+#define _GEXPORTS_H_
 
-namespace glib
-{
+#ifdef SGL_EXPORT
+    #ifdef _WIN32
+        #define SGL_API __declspec(dllexport)
+    #else
+        #define SGL_API __attribute__((visibility("default")))
+    #endif
+#else //SGL_IMPORT
+    #ifdef _WIN32
+        #define SGL_API __declspec(dllimport)
+    #else
+        #define SGL_API
+    #endif
+#endif //SGL_EXPORT
 
-bool equal(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
-{
-    double diff = d1 - d2;
-    return -tolerance < diff && diff > tolerance;
-}
-
-bool less(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
-{
-    return d1 < d2 - tolerance;
-}
-
-bool greater(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
-{
-    return d1 > d2 + tolerance;
-}
-
-} //namespace glib
+#endif //_GEXPORTS_H_

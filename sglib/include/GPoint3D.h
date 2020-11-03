@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
-namespace glib
+namespace sgl
 {
 
 class GVector3D;
@@ -32,13 +32,13 @@ class GMatrix;
  * @brief 3D Point class for mathematical operations
  * @author Artemiy Kanshin
  */
-class GLIB_API GPoint3D
+class SGL_API GPoint3D
 {
 public:
     /**
      * @return World coordinate system origin (0.0, 0.0, 0.0)
      */
-    GLIB_API static const GPoint3D & origin();
+    SGL_API static const GPoint3D & origin();
 
 public:
     /**
@@ -203,7 +203,7 @@ private:
  * @param pt2 - second point
  * @return vector from pt2 to pt1
  */
-GLIB_API GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2);
+SGL_API GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2);
 
 /**
  * @brief Returns point which is a sum of given points coordinates
@@ -211,7 +211,7 @@ GLIB_API GVector3D operator-(const GPoint3D & pt1, const GPoint3D & pt2);
  * @param pt2 - second point
  * @return point which is a summary of given points coordinates
  */
-GLIB_API GPoint3D operator+(const GPoint3D & pt1, const GPoint3D & pt2);
+SGL_API GPoint3D operator+(const GPoint3D & pt1, const GPoint3D & pt2);
 
 /**
  * @brief Returns point which is shifted from given point by given vector
@@ -219,7 +219,7 @@ GLIB_API GPoint3D operator+(const GPoint3D & pt1, const GPoint3D & pt2);
  * @param v - vector
  * @return point which is shifted from given point by given vector
  */
-GLIB_API GPoint3D operator+(const GPoint3D & pt, const GVector3D & v);
+SGL_API GPoint3D operator+(const GPoint3D & pt, const GVector3D & v);
 
 /**
  * @brief Returns point which is shifted from given point by given vector
@@ -227,7 +227,7 @@ GLIB_API GPoint3D operator+(const GPoint3D & pt, const GVector3D & v);
  * @param pt - point
  * @return point which is shifted from given point by given vector
  */
-GLIB_API GPoint3D operator+(const GVector3D & v, const GPoint3D & pt);
+SGL_API GPoint3D operator+(const GVector3D & v, const GPoint3D & pt);
 
 /**
  * @brief Returns point which is shifted from given point by given vector in opposite way
@@ -235,7 +235,7 @@ GLIB_API GPoint3D operator+(const GVector3D & v, const GPoint3D & pt);
  * @param v - vector
  * @return point which is shifted from given point by given vector in opposite way
  */
-GLIB_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
+SGL_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
 
 /**
  * @brief Returns transformed copy of given point
@@ -243,8 +243,8 @@ GLIB_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
  * @param pt - point to transform
  * @return transformed copy of given point
  */
-GLIB_API GPoint3D operator*(const GMatrix & m, const GPoint3D & pt);
+SGL_API GPoint3D operator*(const GMatrix & m, const GPoint3D & pt);
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GPOINT3D_H_

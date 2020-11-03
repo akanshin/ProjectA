@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
-namespace glib
+namespace sgl
 {
 
 /**
@@ -32,7 +32,7 @@ namespace glib
  * @param tolerance - tolerance
  * @return true if input numbers are equal within tolerance, otherwise false
  */
-GLIB_API bool equal(double d1, double d2, double tolerance = GTolerance::zeroTol());
+SGL_API bool equal(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
 /**
  * @brief Returns true if the first number is less than the second within tolerance
@@ -41,7 +41,7 @@ GLIB_API bool equal(double d1, double d2, double tolerance = GTolerance::zeroTol
  * @param tolerance - tolerance
  * @return true if the first number is less than the second within tolerance, otherwise false
  */
-GLIB_API bool less(double d1, double d2, double tolerance = GTolerance::zeroTol());
+SGL_API bool less(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
 /**
  * @brief Returns true if the first number is greater than the second within tolerance
@@ -50,8 +50,8 @@ GLIB_API bool less(double d1, double d2, double tolerance = GTolerance::zeroTol(
  * @param tolerance - tolerance
  * @return true if the first number is greater than the second within tolerance, otherwise false
  */
-GLIB_API bool greater(double d1, double d2, double tolerance = GTolerance::zeroTol());
+SGL_API bool greater(double d1, double d2, double tolerance = GTolerance::zeroTol());
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GUTILS_H_

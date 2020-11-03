@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 #include "GTolerance.h"
 #include "GPoint3D.h"
 
-namespace glib
+namespace sgl
 {
 
 class GVector3D;
@@ -36,13 +36,13 @@ class GVector3D;
  *   <br>[   0,   0,   0,  1 ]
  * @author Artemiy Kanshin
  */
-class GLIB_API GMatrix
+class SGL_API GMatrix
 {
 public:
     /**
      * @return identity matrix
      */
-    GLIB_API static const GMatrix & identity();
+    SGL_API static const GMatrix & identity();
 
 public:
     /**
@@ -272,8 +272,8 @@ private:
     double m_pData[16];
 };
 
-GLIB_API GMatrix operator*(const GMatrix & m1, const GMatrix & m2);
+SGL_API GMatrix operator*(const GMatrix & m1, const GMatrix & m2);
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GMATRIX_H_

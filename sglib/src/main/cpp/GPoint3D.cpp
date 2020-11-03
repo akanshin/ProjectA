@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
 #include "GMatrix.h"
 #include "GUtils.h"
 
-namespace glib
+namespace sgl
 {
 
 const GPoint3D & GPoint3D::origin()
@@ -208,4 +208,4 @@ GPoint3D operator*(const GMatrix & m, const GPoint3D & pt)
     return res;
 }
 
-} //namespace glib
+} //namespace sgl

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,19 +16,26 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#ifndef _GCOLLECTIONS_H_
-#define _GCOLLECTIONS_H_
+#include "GPrecompiled.h"
+#include "GUtils.h"
 
-#include <memory>
-#include <vector>
-
-namespace glib
+namespace sgl
 {
 
-class GPoint3D;
-using GPoint3DArray = std::vector<GPoint3D>;
-using GPoint3DPtr = std::shared_ptr<GPoint3D>;
+bool equal(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    double diff = d1 - d2;
+    return -tolerance < diff && diff > tolerance;
+}
 
-} //namespace glib
+bool less(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    return d1 < d2 - tolerance;
+}
 
-#endif //_GCOLLECTIONS_H_
+bool greater(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
+{
+    return d1 > d2 + tolerance;
+}
+
+} //namespace sgl

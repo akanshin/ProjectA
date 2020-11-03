@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,7 @@
 #include "GVector3D.h"
 #include "GUtils.h"
 
-namespace glib
+namespace sgl
 {
 
 const GMatrix &GMatrix::identity()
@@ -278,4 +278,4 @@ GMatrix operator*(const GMatrix & m1, const GMatrix & m2)
              m1(0, 3) * m2(3, 0) + m1(1, 3) * m2(3, 1) + m1(2, 3) * m2(3, 2) + m1(3, 3) * m2(3, 3) };
 }
 
-} //namespace glib
+} //namespace sgl

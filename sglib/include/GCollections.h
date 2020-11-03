@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,45 +16,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#include "GPrecompiled.h"
-#include "GTolerance.h"
+#ifndef _GCOLLECTIONS_H_
+#define _GCOLLECTIONS_H_
 
-namespace glib
+#include <memory>
+#include <vector>
+
+namespace sgl
 {
 
-static double s_lengthTolerance = 1.0e-6;
-static double s_angularTolerance = 1.0e-10;
-static double s_zeroTolerance = 1.0e-30;
+class GPoint3D;
+using GPoint3DArray = std::vector<GPoint3D>;
+using GPoint3DPtr = std::shared_ptr<GPoint3D>;
+using GPoint3DPtrArray = std::vector<GPoint3DPtr>;
 
-double GTolerance::lengthTol()
-{
-    return s_lengthTolerance;
-}
+class GVector3D;
+using GVector3DArray = std::vector<GVector3D>;
+using GVector3DPtr = std::shared_ptr<GVector3D>;
+using GVector3DPtrArray = std::vector<GVector3DPtr>;
 
-double GTolerance::angularTol()
-{
-    return s_angularTolerance;
-}
+class GMatrix;
+using GMatrixArray = std::vector<GMatrix>;
+using GMatrixPtr = std::shared_ptr<GMatrix>;
+using GMatrixPtrArray = std::vector<GMatrixPtr>;
 
-double GTolerance::zeroTol()
-{
-    return s_zeroTolerance;
-}
+} //namespace sgl
 
-void GTolerance::setLengthTol(double tolerance)
-{
-    s_lengthTolerance = tolerance;
-}
-
-void GTolerance::setAngularTol(double tolerance)
-{
-    s_angularTolerance = tolerance;
-}
-
-void GTolerance::setZeroTol(double tolerance)
-{
-    s_zeroTolerance = tolerance;
-}
-
-
-} //namespace glib
+#endif //_GCOLLECTIONS_H_

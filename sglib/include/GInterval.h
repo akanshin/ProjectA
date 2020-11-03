@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,13 +22,13 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
-namespace glib
+namespace sgl
 {
 
 /**
  * @brief Class represents linear interval. 'from' <= 'to'
  */
-class GLIB_API GInterval
+class SGL_API GInterval
 {
 public:
     /**
@@ -104,8 +104,8 @@ private:
     double m_from{0}, m_to{1.0};
 };
 
-GLIB_API GInterval operator&(const GInterval & i1, const GInterval & i2);
+SGL_API GInterval operator&(const GInterval & i1, const GInterval & i2);
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GINTERVAL_H_

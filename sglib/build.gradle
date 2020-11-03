@@ -1,4 +1,4 @@
-// geometry library
+// Simple Geometric Library
 
 plugins {
     id 'cpp-library'
@@ -17,6 +17,4 @@ library {
         machines.windows.x86_64,
         machines.macOS.x86_64
     ]
-
-
 }

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -16,12 +16,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#include "GPrecompiled.h"
-#include "GInterval.h"
+#ifndef _GPRECOMPILED_H_
+#define _GPRECOMPILED_H_
 
-namespace glib
-{
+// Export definition
+#define SGL_EXPORT
 
+//STL includes
+#include <cmath>
+#include <cstring>
+#include <initializer_list>
+#include <stdexcept>
+#include <utility>
 
-
-} //namespace glib
+#endif //_GPRECOMPILED_H_

@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
-namespace glib
+namespace sgl
 {
 
 class GMatrix;
@@ -32,7 +32,7 @@ class GPoint3D;
  * @brief 3D Vector class for mathematical operations
  * @author Artemiy Kanshin
  */
-class GLIB_API GVector3D
+class SGL_API GVector3D
 {
 public:
     /**
@@ -260,7 +260,7 @@ private:
  * @param v2 - second vector
  * @return scalar product result
  */
-GLIB_API double operator%(const GVector3D & v1, const GVector3D & v2);
+SGL_API double operator%(const GVector3D & v1, const GVector3D & v2);
 
 /**
  * @brief Cross product operator
@@ -268,7 +268,7 @@ GLIB_API double operator%(const GVector3D & v1, const GVector3D & v2);
  * @param v2 - second vector
  * @return vector which is cross product result
  */
-GLIB_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
+SGL_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
 
 /**
  * @brief Returns a sum of given vectors
@@ -276,7 +276,7 @@ GLIB_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
  * @param v2 - second vector
  * @return a sum of given vectors
  */
-GLIB_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
+SGL_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
 
 /**
  * @brief Returns transformed copy of given vector
@@ -284,8 +284,8 @@ GLIB_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
  * @param v - vector to transform
  * @return transformed copy of given vector
  */
-GLIB_API GVector3D operator*(const GMatrix & m, const GVector3D & v);
+SGL_API GVector3D operator*(const GMatrix & m, const GVector3D & v);
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GVECTOR3D_H_

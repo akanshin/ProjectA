@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////
-// ProjectA/geometry
+// Simple Geometric Library (sglib)
 // Copyright (C) 2020   Artemiy Kanshin
 //
 // This program is free software: you can redistribute it and/or modify
@@ -21,13 +21,13 @@
 
 #include "GExports.h"
 
-namespace glib
+namespace sgl
 {
 
 /**
  * @brief Utility class which provides access to tolerance constants.
  */
-class GLIB_API GTolerance
+class SGL_API GTolerance
 {
 public:
     GTolerance() = delete;
@@ -67,6 +67,6 @@ public:
     static void setZeroTol(double tolerance);
 };
 
-} //namespace glib
+} //namespace sgl
 
 #endif //_GTOLERANCE_H_
