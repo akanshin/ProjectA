@@ -16,4 +16,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
+#ifndef _GPRECOMPILED_H_
+#define _GPRECOMPILED_H_
+
+// Export definition
+#define SGL_EXPORT
+
+//STL includes
+#include <cmath>
+#include <cstring>
+#include <initializer_list>
+#include <stdexcept>
+#include <utility>
+
+#endif //_GPRECOMPILED_H_

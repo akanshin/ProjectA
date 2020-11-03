@@ -16,4 +16,45 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
+#include "GPrecompiled.h"
+#include "GTolerance.h"
+
+namespace sgl
+{
+
+static double s_lengthTolerance = 1.0e-6;
+static double s_angularTolerance = 1.0e-10;
+static double s_zeroTolerance = 1.0e-30;
+
+double GTolerance::lengthTol()
+{
+    return s_lengthTolerance;
+}
+
+double GTolerance::angularTol()
+{
+    return s_angularTolerance;
+}
+
+double GTolerance::zeroTol()
+{
+    return s_zeroTolerance;
+}
+
+void GTolerance::setLengthTol(double tolerance)
+{
+    s_lengthTolerance = tolerance;
+}
+
+void GTolerance::setAngularTol(double tolerance)
+{
+    s_angularTolerance = tolerance;
+}
+
+void GTolerance::setZeroTol(double tolerance)
+{
+    s_zeroTolerance = tolerance;
+}
+
+
+} //namespace sgl
