@@ -1,1 +1,1 @@
-# ProjectA
+# Simple Geometric Library
