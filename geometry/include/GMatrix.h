@@ -61,7 +61,7 @@ public:
     GMatrix(GMatrix &&) noexcept;
 
     /**
-     *
+     * @brief Initializes matrix by initializer list which should have 16 numbers
      */
     GMatrix(std::initializer_list<double>);
 
