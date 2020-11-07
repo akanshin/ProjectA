@@ -213,6 +213,7 @@ GVector3D & GVector3D::operator*=(const GMatrix & m)
     double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z;
     double z = m(0, 2) * m_x + m(1, 2) * m_y + m(2, 2) * m_z;
     set(x, y, z);
+    return *this;
 }
 
 double operator%(const GVector3D & v1, const GVector3D & v2)

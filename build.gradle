@@ -20,8 +20,10 @@ plugins {
     id 'idea'
     id 'cpp-library'
     id 'cpp-unit-test'
+    id 'maven-publish'
 }
 
+group = "ru.artemiyk.cpp"
 version = 1.0
 
 def generatePrefixHeaderFileTask = tasks.register("generatePrefixHeaderFile", PrefixHeaderFileGenerateTask) {
@@ -75,11 +77,15 @@ library {
 
             compilerArgs.addAll toolChain.map {
                 if (it instanceof Clang) {
-                    return ['-include', generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath, '-include-pch', findPchFile(pchTask.get().objectFileDir.get()).absolutePath]
+                    return ['-include', generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath,
+                            '-include-pch', findPchFile(pchTask.get().objectFileDir.get()).absolutePath]
                 } else if (it instanceof Gcc) {
-                    return ['-include', generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath, '-I', findPchFile(pchTask.get().objectFileDir.get()).parentFile.absolutePath]
+                    return ['-include', generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath,
+                            '-I', findPchFile(pchTask.get().objectFileDir.get()).parentFile.absolutePath]
                 } else if (it instanceof VisualCpp) {
-                    return ["/FI${generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath}", "/Yu${generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath}", "/Fp${findPchFile(pchTask.get().objectFileDir.get()).absolutePath}"]
+                    return ["/FI${generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath}",
+                            "/Yu${generatePrefixHeaderFileTask.get().prefixHeaderFile.absolutePath}",
+                            "/Fp${findPchFile(pchTask.get().objectFileDir.get()).absolutePath}"]
 
                 }
                 logger.warning("The tool chain type is not supported for precompiled header support.")
@@ -95,6 +101,26 @@ library {
     }
 
     linkage = [Linkage.SHARED]
+
+    targetMachines = [
+        machines.linux.x86_64,
+        machines.windows.x86_64,
+        machines.macOS.x86_64
+    ]
+}
+
+unitTest {
+    source.from file('src/test/cpp')
+
+    dependencies {
+        implementation project(':googletest')
+    }
+
+    binaries.whenElementKnown(CppTestExecutable) { binary ->
+        if (binary.targetMachine.operatingSystemFamily.linux) {
+            binary.linkTask.get().linkerArgs.add('-pthread')
+        }
+    }
 
     targetMachines = [
         machines.linux.x86_64,

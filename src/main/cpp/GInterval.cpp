@@ -89,6 +89,7 @@ GInterval & GInterval::operator+=(const GInterval & interval)
 {
     m_from = std::min(m_from, interval.m_from);
     m_to = std::max(m_to, interval.m_to);
+    return *this;
 }
 
 } //namespace sgl

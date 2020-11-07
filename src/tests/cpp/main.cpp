@@ -16,8 +16,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
+#include "gtest/gtest.h"
 
-include 'googletest'
-
-includeBuild 'cmake-plugin'
+int main(int argc, char** argv)
+{
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}

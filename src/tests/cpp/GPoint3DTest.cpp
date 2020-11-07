@@ -16,8 +16,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
+#include "GPoint3D.h"
+#include "GUtils.h"
 
-include 'googletest'
+#include "gtest/gtest.h"
 
-includeBuild 'cmake-plugin'
+using namespace sgl;
+
+TEST(GPoint3DTest, test_constructor)
+{
+    GPoint3D p;
+    ASSERT(equal(p[0], 1.0, GTolerance::zeroTol()));
+    ASSERT(equal(p[1], 0.0, GTolerance::zeroTol()));
+    ASSERT(equal(p[2], 0.0, GTolerance::zeroTol()));
+}
