@@ -33,7 +33,7 @@ def downloadGoogletest = tasks.register("downloadGoogletest", org.gradle.samples
 }
 
 cmake {
-    binary = "googlemock/gtest/libgtest.a"
+    binary = "lib/libgtestd.a"
     projectDirectory = downloadGoogletest.flatMap { it.sourceDir }
     includeDirectory = downloadGoogletest.flatMap { it.headerDir }
 }

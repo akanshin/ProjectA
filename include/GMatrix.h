@@ -23,6 +23,8 @@
 #include "GTolerance.h"
 #include "GPoint3D.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 

@@ -20,4 +20,4 @@ rootProject.name = 'sglib'
 
 include 'googletest'
 
-includeBuild 'cmake-plugin'
+includeBuild 'build-wrapper-plugin'

@@ -22,6 +22,8 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 
@@ -151,6 +153,13 @@ public:
      * @return reference to this point object
      */
     GPoint3D & operator=(const GPoint3D & pt);
+
+    /**
+     * brief Move assignment operator
+     * @param pt - point
+     * @return reference to this point object
+     */
+    GPoint3D & operator=(GPoint3D && pt);
 
     /**
      * @brief Adds input point coordinates

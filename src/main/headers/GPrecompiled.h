@@ -26,7 +26,6 @@
 #include <algorithm>
 #include <cmath>
 #include <cstring>
-#include <initializer_list>
 #include <stdexcept>
 #include <utility>
 

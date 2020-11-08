@@ -25,7 +25,7 @@ namespace sgl
 bool equal(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)
 {
     double diff = d1 - d2;
-    return -tolerance < diff && diff > tolerance;
+    return (-tolerance < diff) && (diff < tolerance);
 }
 
 bool less(double d1, double d2, double tolerance /*= GTolerance::lengthTol()*/)

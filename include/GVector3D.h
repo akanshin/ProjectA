@@ -22,6 +22,8 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 
