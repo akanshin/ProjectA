@@ -17,10 +17,8 @@
 /////////////////////////////////////////////////////////////////////////
 
 plugins {
-    id 'idea'
     id 'cpp-library'
     id 'cpp-unit-test'
-    id 'maven-publish'
 }
 
 group = "ru.artemiyk.cpp"
@@ -99,32 +97,18 @@ library {
             }
         }
     }
-
-    linkage = [Linkage.SHARED]
-
-    targetMachines = [
-        machines.linux.x86_64,
-        machines.windows.x86_64,
-        machines.macOS.x86_64
-    ]
 }
 
 unitTest {
-    source.from file('src/test/cpp')
-
     dependencies {
         implementation project(':googletest')
     }
+
+    source.from file('src/test/cpp')
 
     binaries.whenElementKnown(CppTestExecutable) { binary ->
         if (binary.targetMachine.operatingSystemFamily.linux) {
             binary.linkTask.get().linkerArgs.add('-pthread')
         }
     }
-
-    targetMachines = [
-        machines.linux.x86_64,
-        machines.windows.x86_64,
-        machines.macOS.x86_64
-    ]
 }

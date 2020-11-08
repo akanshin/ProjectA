@@ -19,18 +19,14 @@
 #ifndef _GEXPORTS_H_
 #define _GEXPORTS_H_
 
-#ifdef SGL_EXPORT
-    #ifdef _WIN32
+#ifdef _WIN32
+    #ifdef SGL_EXPORT
         #define SGL_API __declspec(dllexport)
     #else
-        #define SGL_API __attribute__((visibility("default")))
-    #endif
-#else //SGL_IMPORT
-    #ifdef _WIN32
         #define SGL_API __declspec(dllimport)
-    #else
-        #define SGL_API
     #endif
-#endif //SGL_EXPORT
+#else
+    #define SGL_API
+#endif
 
 #endif //_GEXPORTS_H_
