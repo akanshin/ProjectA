@@ -241,12 +241,24 @@ double operator%(const GVector3D & v1, const GVector3D & v2)
 
 GVector3D operator*(const GVector3D & v1, const GVector3D & v2)
 {
-    return GVector3D(v1[1] * v2[2], v1[2] * v2[0], v1[0] * v2[1]);
+    return { v1[1] * v2[2] - v1[2] * v2[1],
+             v1[2] * v2[0] - v1[0] * v2[2],
+             v1[0] * v2[1] - v1[1] * v2[0] };
+}
+
+GVector3D operator+(const GVector3D & v1, const GVector3D & v2)
+{
+    return { v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2] };
+}
+
+GVector3D operator-(const GVector3D & v1, const GVector3D & v2)
+{
+    return { v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2] };
 }
 
 GVector3D operator*(const GMatrix & m, const GVector3D & v)
 {
-    GVector3D res;
+    GVector3D res = v;
     res *= m;
     return res;
 }

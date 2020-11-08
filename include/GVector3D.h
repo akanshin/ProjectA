@@ -297,6 +297,14 @@ SGL_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
 SGL_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
 
 /**
+ * @brief Returns a difference of given vector
+ * @param v1 - first vector
+ * @param v2 - second vector
+ * @return a difference
+ */
+SGL_API GVector3D operator-(const GVector3D & v1, const GVector3D & v2);
+
+/**
  * @brief Returns transformed copy of given vector
  * @param m - transformation matrix
  * @param v - vector to transform
