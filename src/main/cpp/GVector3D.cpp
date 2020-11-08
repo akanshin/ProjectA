@@ -24,6 +24,24 @@
 namespace sgl
 {
 
+const GVector3D & GVector3D::axisX()
+{
+    static GVector3D s_axisX{ 1.0, 0.0, 0.0 };
+    return s_axisX;
+}
+
+const GVector3D & GVector3D::axisY()
+{
+    static GVector3D s_axisY{ 0.0, 1.0, 0.0 };
+    return s_axisY;
+}
+
+const GVector3D & GVector3D::axisZ()
+{
+    static GVector3D s_axisZ{ 0.0, 0.0, 1.0 };
+    return s_axisZ;
+}
+
 GVector3D::GVector3D() = default;
 
 GVector3D::GVector3D(const GVector3D & other) = default;

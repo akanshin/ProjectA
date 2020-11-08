@@ -22,7 +22,7 @@ plugins {
 }
 
 group = "ru.artemiyk.cpp"
-version = 1.0
+version = 0.1
 
 def generatePrefixHeaderFileTask = tasks.register("generatePrefixHeaderFile", PrefixHeaderFileGenerateTask) {
     header = "GPrecompiled.h"

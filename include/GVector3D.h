@@ -38,6 +38,22 @@ class SGL_API GVector3D
 {
 public:
     /**
+     * @return const reference to [1.0, 0.0, 0.0] vector
+     */
+    static const GVector3D & axisX();
+
+    /**
+     * @return const reference to [0.0, 1.0, 0.0] vector
+     */
+    static const GVector3D & axisY();
+
+    /**
+     * @return const reference to [0.0, 0.0, 1.0] vector
+     */
+    static const GVector3D & axisZ();
+
+public:
+    /**
      * @brief Initializes zero vector.
      */
     GVector3D();
@@ -74,7 +90,7 @@ public:
     GVector3D(std::initializer_list<double>);
 
     /** No doc */
-    ~GVector3D();
+    virtual ~GVector3D();
 
     /**
      * @return X coordinate

@@ -80,7 +80,7 @@ public:
     GPoint3D(std::initializer_list<double>);
 
     /** No doc */
-    ~GPoint3D();
+    virtual ~GPoint3D();
 
     /**
      * @return X coordinate
