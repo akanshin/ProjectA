@@ -42,7 +42,7 @@ public:
     /**
      * @return identity matrix
      */
-    SGL_API static const GMatrix & identity();
+    static const GMatrix & identity();
 
 public:
     /**

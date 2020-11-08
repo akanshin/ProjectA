@@ -38,7 +38,7 @@ public:
     /**
      * @return World coordinate system origin (0.0, 0.0, 0.0)
      */
-    SGL_API static const GPoint3D & origin();
+    static const GPoint3D & origin();
 
 public:
     /**

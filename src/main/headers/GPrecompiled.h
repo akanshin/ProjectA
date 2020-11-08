@@ -23,6 +23,7 @@
 #define SGL_EXPORT
 
 //STL includes
+#include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <initializer_list>
