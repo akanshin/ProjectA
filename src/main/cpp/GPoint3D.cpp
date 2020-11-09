@@ -92,6 +92,9 @@ void GPoint3D::set(double newX, double newY, double newZ)
 
 bool GPoint3D::equals(const GPoint3D & pt, double tolerance /*= GTolerance::lengthTol()*/) const
 {
+    if (this == &pt)
+        return true;
+
     const GPoint3D & rthis = *this;
     for (std::size_t idx = 0; idx < 3; ++idx)
         if (!equal(rthis[idx], pt[idx], tolerance))
@@ -124,6 +127,8 @@ double & GPoint3D::operator[](std::size_t coordIdx)
 }
 
 GPoint3D & GPoint3D::operator=(const GPoint3D & pt) = default;
+
+GPoint3D & GPoint3D::operator=(GPoint3D && pt) = default;
 
 GPoint3D & GPoint3D::operator+=(const GPoint3D & pt)
 {

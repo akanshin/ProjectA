@@ -22,6 +22,8 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 
@@ -34,6 +36,22 @@ class GPoint3D;
  */
 class SGL_API GVector3D
 {
+public:
+    /**
+     * @return const reference to [1.0, 0.0, 0.0] vector
+     */
+    static const GVector3D & axisX();
+
+    /**
+     * @return const reference to [0.0, 1.0, 0.0] vector
+     */
+    static const GVector3D & axisY();
+
+    /**
+     * @return const reference to [0.0, 0.0, 1.0] vector
+     */
+    static const GVector3D & axisZ();
+
 public:
     /**
      * @brief Initializes zero vector.
@@ -72,7 +90,7 @@ public:
     GVector3D(std::initializer_list<double>);
 
     /** No doc */
-    ~GVector3D();
+    virtual ~GVector3D();
 
     /**
      * @return X coordinate
@@ -277,6 +295,14 @@ SGL_API GVector3D operator*(const GVector3D & v1, const GVector3D & v2);
  * @return a sum of given vectors
  */
 SGL_API GVector3D operator+(const GVector3D & v1, const GVector3D & v2);
+
+/**
+ * @brief Returns a difference of given vector
+ * @param v1 - first vector
+ * @param v2 - second vector
+ * @return a difference
+ */
+SGL_API GVector3D operator-(const GVector3D & v1, const GVector3D & v2);
 
 /**
  * @brief Returns transformed copy of given vector

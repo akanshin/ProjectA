@@ -23,6 +23,8 @@
 #include "GTolerance.h"
 #include "GPoint3D.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 
@@ -42,7 +44,7 @@ public:
     /**
      * @return identity matrix
      */
-    SGL_API static const GMatrix & identity();
+    static const GMatrix & identity();
 
 public:
     /**

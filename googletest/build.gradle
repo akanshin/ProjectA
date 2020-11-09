@@ -16,8 +16,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
+plugins {
+    id 'org.gradle.samples.cmake-library' version '1.0'
+}
 
-include 'googletest'
+def downloadGoogletest = tasks.register("downloadGoogletest", org.gradle.samples.tasks.DownloadZipAndUnpack) {
+    url = "https://github.com/google/googletest/archive/release-1.10.0.zip"
 
-includeBuild 'build-wrapper-plugin'
+    ext.headerDir = project.objects.directoryProperty()
+    outputs.dir(headerDir)
+    headerDir.set outputDirectory.dir("googletest-release-1.10.0/googletest/include")
+
+    ext.sourceDir = project.objects.directoryProperty()
+    outputs.dir(sourceDir)
+    sourceDir.set outputDirectory.dir("googletest-release-1.10.0")
+}
+
+cmake {
+    binary = "lib/libgtestd.a"
+    projectDirectory = downloadGoogletest.flatMap { it.sourceDir }
+    includeDirectory = downloadGoogletest.flatMap { it.headerDir }
+}

@@ -22,6 +22,8 @@
 #include "GExports.h"
 #include "GTolerance.h"
 
+#include <initializer_list>
+
 namespace sgl
 {
 
@@ -38,7 +40,7 @@ public:
     /**
      * @return World coordinate system origin (0.0, 0.0, 0.0)
      */
-    SGL_API static const GPoint3D & origin();
+    static const GPoint3D & origin();
 
 public:
     /**
@@ -78,7 +80,7 @@ public:
     GPoint3D(std::initializer_list<double>);
 
     /** No doc */
-    ~GPoint3D();
+    virtual ~GPoint3D();
 
     /**
      * @return X coordinate
@@ -151,6 +153,13 @@ public:
      * @return reference to this point object
      */
     GPoint3D & operator=(const GPoint3D & pt);
+
+    /**
+     * brief Move assignment operator
+     * @param pt - point
+     * @return reference to this point object
+     */
+    GPoint3D & operator=(GPoint3D && pt);
 
     /**
      * @brief Adds input point coordinates

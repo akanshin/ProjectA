@@ -16,8 +16,3 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-rootProject.name = 'sglib'
-
-include 'googletest'
-
-includeBuild 'build-wrapper-plugin'

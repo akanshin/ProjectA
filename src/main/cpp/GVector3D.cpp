@@ -24,6 +24,24 @@
 namespace sgl
 {
 
+const GVector3D & GVector3D::axisX()
+{
+    static GVector3D s_axisX{ 1.0, 0.0, 0.0 };
+    return s_axisX;
+}
+
+const GVector3D & GVector3D::axisY()
+{
+    static GVector3D s_axisY{ 0.0, 1.0, 0.0 };
+    return s_axisY;
+}
+
+const GVector3D & GVector3D::axisZ()
+{
+    static GVector3D s_axisZ{ 0.0, 0.0, 1.0 };
+    return s_axisZ;
+}
+
 GVector3D::GVector3D() = default;
 
 GVector3D::GVector3D(const GVector3D & other) = default;
@@ -213,6 +231,7 @@ GVector3D & GVector3D::operator*=(const GMatrix & m)
     double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z;
     double z = m(0, 2) * m_x + m(1, 2) * m_y + m(2, 2) * m_z;
     set(x, y, z);
+    return *this;
 }
 
 double operator%(const GVector3D & v1, const GVector3D & v2)
@@ -222,12 +241,24 @@ double operator%(const GVector3D & v1, const GVector3D & v2)
 
 GVector3D operator*(const GVector3D & v1, const GVector3D & v2)
 {
-    return GVector3D(v1[1] * v2[2], v1[2] * v2[0], v1[0] * v2[1]);
+    return { v1[1] * v2[2] - v1[2] * v2[1],
+             v1[2] * v2[0] - v1[0] * v2[2],
+             v1[0] * v2[1] - v1[1] * v2[0] };
+}
+
+GVector3D operator+(const GVector3D & v1, const GVector3D & v2)
+{
+    return { v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2] };
+}
+
+GVector3D operator-(const GVector3D & v1, const GVector3D & v2)
+{
+    return { v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2] };
 }
 
 GVector3D operator*(const GMatrix & m, const GVector3D & v)
 {
-    GVector3D res;
+    GVector3D res = v;
     res *= m;
     return res;
 }
