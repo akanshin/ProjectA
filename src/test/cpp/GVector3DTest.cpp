@@ -302,9 +302,9 @@ TEST(GVector3DTest, test_operatorMultiplyByMatrix)
 {
     GVector3D v{ 5.0, 4.0, 3.0 };
     GMatrix4D m{  1.0, 2.0,  3.0, 0.0,
-               -2.0, 1.0, -4.0, 0.0,
-               -3.0, 4.0,  1.0, 0.0,
-                5.0, 6.0,  7.0, 1.0 };
+                 -2.0, 1.0, -4.0, 0.0,
+                 -3.0, 4.0,  1.0, 0.0,
+                  5.0, 6.0,  7.0, 1.0 };
     v *= m;
     ASSERT_NEAR(v[0], -12.0, GTolerance::lengthTol());
     ASSERT_NEAR(v[1], 26.0, GTolerance::lengthTol());
@@ -352,9 +352,9 @@ TEST(GVector3DTest, test_operatorMultiplyByMatrixCopy)
 {
     GVector3D v{ 5.0, 4.0, 3.0 };
     GMatrix4D m{  1.0, 2.0,  3.0, 0.0,
-               -2.0, 1.0, -4.0, 0.0,
-               -3.0, 4.0,  1.0, 0.0,
-                5.0, 6.0,  7.0, 1.0 };
+                 -2.0, 1.0, -4.0, 0.0,
+                 -3.0, 4.0,  1.0, 0.0,
+                  5.0, 6.0,  7.0, 1.0 };
     GVector3D res = m * v;
     ASSERT_NEAR(v[0], 5.0, GTolerance::lengthTol());
     ASSERT_NEAR(v[1], 4.0, GTolerance::lengthTol());
