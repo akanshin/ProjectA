@@ -35,7 +35,10 @@ GMatrix4D::GMatrix4D()
     setIdentity();
 }
 
-GMatrix4D::GMatrix4D(const GMatrix4D &m) = default;
+GMatrix4D::GMatrix4D(const GMatrix4D &m)
+{
+    std::memcpy(m_pData, m.m_pData, 16 * sizeof(double));
+}
 
 GMatrix4D::GMatrix4D(GMatrix4D &&m) noexcept = default;
 
