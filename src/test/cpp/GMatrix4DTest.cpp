@@ -16,3 +16,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
+#include "gtest/gtest.h"
+#include "GMatrix4D.h"
+#include "GVector3D.h"
+#include "GPoint3D.h"
+#include "GUtils.h"
+
+using namespace sgl;
+
+TEST(GMatrix4DTest, test_identity)
+{
+    const auto & e = GMatrix4D::identity();
+    for (std::size_t rowIdx = 0; rowIdx < 4; ++rowIdx)
+    {
+        for (std::size_t colIdx = 0; colIdx < 4; ++colIdx)
+        {
+            ASSERT_NEAR(e(rowIdx, colIdx), ((rowIdx == colIdx) ? 1.0 : 0.0), GTolerance::zeroTol());
+        }
+    }
+}

@@ -18,7 +18,7 @@
 
 #include "GVector3D.h"
 #include "GPoint3D.h"
-#include "GMatrix.h"
+#include "GMatrix4D.h"
 #include "GUtils.h"
 
 #include <cmath>
@@ -301,7 +301,7 @@ TEST(GVector3DTest, test_operatorMultiplyDivideByScalar)
 TEST(GVector3DTest, test_operatorMultiplyByMatrix)
 {
     GVector3D v{ 5.0, 4.0, 3.0 };
-    GMatrix m{  1.0, 2.0,  3.0, 0.0,
+    GMatrix4D m{  1.0, 2.0,  3.0, 0.0,
                -2.0, 1.0, -4.0, 0.0,
                -3.0, 4.0,  1.0, 0.0,
                 5.0, 6.0,  7.0, 1.0 };
@@ -351,9 +351,9 @@ TEST(GVector3DTest, test_operatorMinus)
 TEST(GVector3DTest, test_operatorMultiplyByMatrixCopy)
 {
     GVector3D v{ 5.0, 4.0, 3.0 };
-    GMatrix m{  1.0, 2.0,  3.0, 0.0,
-                -2.0, 1.0, -4.0, 0.0,
-                -3.0, 4.0,  1.0, 0.0,
+    GMatrix4D m{  1.0, 2.0,  3.0, 0.0,
+               -2.0, 1.0, -4.0, 0.0,
+               -3.0, 4.0,  1.0, 0.0,
                 5.0, 6.0,  7.0, 1.0 };
     GVector3D res = m * v;
     ASSERT_NEAR(v[0], 5.0, GTolerance::lengthTol());

@@ -18,7 +18,7 @@
 
 #include "GPrecompiled.h"
 #include "GVector3D.h"
-#include "GMatrix.h"
+#include "GMatrix4D.h"
 #include "GUtils.h"
 
 namespace sgl
@@ -225,7 +225,7 @@ GVector3D & GVector3D::operator/=(double scalar)
     return *this;
 }
 
-GVector3D & GVector3D::operator*=(const GMatrix & m)
+GVector3D & GVector3D::operator*=(const GMatrix4D & m)
 {
     double x = m(0, 0) * m_x + m(1, 0) * m_y + m(2, 0) * m_z;
     double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z;
@@ -256,7 +256,7 @@ GVector3D operator-(const GVector3D & v1, const GVector3D & v2)
     return { v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2] };
 }
 
-GVector3D operator*(const GMatrix & m, const GVector3D & v)
+GVector3D operator*(const GMatrix4D & m, const GVector3D & v)
 {
     GVector3D res = v;
     res *= m;

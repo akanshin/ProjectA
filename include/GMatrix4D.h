@@ -16,8 +16,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#ifndef _GMATRIX_H_
-#define _GMATRIX_H_
+#ifndef _GMATRIX4D_H_
+#define _GMATRIX4D_H_
 
 #include "GExports.h"
 #include "GTolerance.h"
@@ -36,36 +36,41 @@ class GVector3D;
  *   <br>[ q01, a11, a21, t1 ]
  *   <br>[ a02, a12, a22, t2 ]
  *   <br>[   0,   0,   0,  1 ]
+ *   <p/> Example of translation matrix:
+ *   <br> GMatrix4D translation { 1.0, 0.0, 0.0, 5.0,
+ *   <br>                         0.0, 1.0, 0.0, 7.0,
+ *   <br>                         0.0, 0.0, 1.0, 4.0,
+ *   <br>                         0.0, 0.0, 0.0, 1.0 };
  * @author Artemiy Kanshin
  */
-class SGL_API GMatrix
+class SGL_API GMatrix4D
 {
 public:
     /**
      * @return identity matrix
      */
-    static const GMatrix & identity();
+    static const GMatrix4D & identity();
 
 public:
     /**
      * @brief Initializes identity matrix
      */
-    GMatrix();
+    GMatrix4D();
 
     /**
      * @brief Copy constructor
      */
-    GMatrix(const GMatrix &);
+    GMatrix4D(const GMatrix4D &);
 
     /**
      * @brief Move constructor
      */
-    GMatrix(GMatrix &&) noexcept;
+    GMatrix4D(GMatrix4D &&) noexcept;
 
     /**
      * @brief Initializes matrix by initializer list which should have 16 numbers
      */
-    GMatrix(std::initializer_list<double>);
+    GMatrix4D(std::initializer_list<double>);
 
     /**
      * @brief Initializes matrix with coordinate system parameters
@@ -74,17 +79,17 @@ public:
      * @param y - y axis
      * @param z - z axis
      */
-    explicit GMatrix(const GPoint3D & origin, const GVector3D & x, const GVector3D & y, const GVector3D & z);
+    explicit GMatrix4D(const GPoint3D & origin, const GVector3D & x, const GVector3D & y, const GVector3D & z);
 
     /** No doc */
-    ~GMatrix();
+    ~GMatrix4D();
 
     /**
      * @brief operator =
      * @param m - matrix
      * @return reference to this matrix object
      */
-    GMatrix & operator=(const GMatrix & m);
+    GMatrix4D & operator=(const GMatrix4D & m);
 
     /**
      * @brief Makes this matrix identity
@@ -112,48 +117,48 @@ public:
     GVector3D z() const;
 
     /**
-     * @brief Gives read only access to the matrix column by index
-     * @param column - column index
-     * @return const pointer to column
+     * @brief Gives read only access to the matrix row by index
+     * @param row - row index
+     * @return const pointer to row
      */
-    const double * const operator[](std::size_t column) const;
+    const double * const operator[](std::size_t row) const;
 
     /**
-     * @brief Gives write access to the matrix column by index
-     * @param column - column index
-     * @return pointer to column
+     * @brief Gives write access to the matrix row by index
+     * @param row - row index
+     * @return pointer to row
      */
-    double * operator[](std::size_t column);
+    double * operator[](std::size_t row);
 
     /**
      * @brief Returns element of matrix
-     * @param column - column index
      * @param row - row index
+     * @param column - column index
      * @return element of matrix
      */
-    double operator()(std::size_t column, std::size_t row) const;
+    double operator()(std::size_t row, std::size_t column) const;
 
     /**
      * @brief Returns reference to element of matrix
-     * @param column - column index
      * @param row - row index
+     * @param column - column index
      * @return reference to element of matrix
      */
-    double & operator()(std::size_t column, std::size_t row);
+    double & operator()(std::size_t row, std::size_t column);
 
     /**
      * @brief Produces multiplication of matrix: this * m
      * @param m - another matrix
      * @return reference to this matrix object
      */
-    GMatrix & postMultiplyBy(const GMatrix & m);
+    GMatrix4D & postMultiplyBy(const GMatrix4D & m);
 
     /**
      * @brief Produces multiplication of matrix: m * this
      * @param m - another matrix
      * @return reference to this matrix object
      */
-    GMatrix & preMultiplyBy(const GMatrix & m);
+    GMatrix4D & preMultiplyBy(const GMatrix4D & m);
 
     /**
      * @brief Sets this matrix as result of multiplication of given matrices
@@ -161,25 +166,25 @@ public:
      * @param m2 - second matrix
      * @return reference to this matrix object
      */
-    GMatrix & product(const GMatrix & m1, const GMatrix & m2);
+    GMatrix4D & product(const GMatrix4D & m1, const GMatrix4D & m2);
 
     /**
      * @brief Returns transposed copy of this matrix
      * @return transposed copy of this matrix
      */
-    GMatrix transpose() const;
+    GMatrix4D transpose() const;
 
     /**
      * @brief Inverts this matrix
      * @return reference to this matrix object
      */
-    GMatrix & invert();
+    GMatrix4D & invert();
 
     /**
      * @brief Returns inverted copy of this matrix
      * @return inverted copy of this matrix
      */
-    GMatrix inverse() const;
+    GMatrix4D inverse() const;
 
     /**
      * @brief Checks matrix singularity
@@ -200,14 +205,14 @@ public:
      * @param tolerance - zero tolerance
      * @return true if this matrix is equal to given within tolerance, otherwise false
      */
-    bool equals(const GMatrix & m, double tolerance = GTolerance::zeroTol());
+    bool equals(const GMatrix4D & m, double tolerance = GTolerance::zeroTol());
 
     /**
      * @brief Creates translation matrix
      * @param v - translation vector
      * @return translation matrix
      */
-    static GMatrix translation(const GVector3D & v);
+    static GMatrix4D translation(const GVector3D & v);
 
     /**
      * @brief Creates rotation matrix
@@ -216,7 +221,7 @@ public:
      * @param center - center of rotation
      * @return rotation matrix
      */
-    static GMatrix rotation(double angle, const GVector3D & axis, const GPoint3D & center = GPoint3D::origin());
+    static GMatrix4D rotation(double angle, const GVector3D & axis, const GPoint3D & center = GPoint3D::origin());
 
     /**
      * @brief Creates scale matrix
@@ -224,7 +229,7 @@ public:
      * @param base - base point
      * @return scale matrix
      */
-    static GMatrix scale(double scale, const GPoint3D & base = GPoint3D::origin());
+    static GMatrix4D scale(double scale, const GPoint3D & base = GPoint3D::origin());
 
     /**
      * @brief Creates scale matrix
@@ -234,7 +239,7 @@ public:
      * @param base - base point
      * @return scale matrix
      */
-    static GMatrix scale(double scaleX, double scaleY, double scaleZ, const GPoint3D & base = GPoint3D::origin());
+    static GMatrix4D scale(double scaleX, double scaleY, double scaleZ, const GPoint3D & base = GPoint3D::origin());
 
     /**
      * @brief Creates scale matrix
@@ -243,7 +248,7 @@ public:
      * @param base - base point
      * @return scale matrix
      */
-    static GMatrix scale(double scale, const GVector3D & direction, const GPoint3D & base = GPoint3D::origin());
+    static GMatrix4D scale(double scale, const GVector3D & direction, const GPoint3D & base = GPoint3D::origin());
 
     /**
      * @brief Creates mirror matrix
@@ -251,7 +256,7 @@ public:
      * @param direction - mirroring direction
      * @return mirror matrix
      */
-    static GMatrix mirror(const GPoint3D & base, const GVector3D & direction);
+    static GMatrix4D mirror(const GPoint3D & base, const GVector3D & direction);
 
     /**
      * @brief Creates projection matrix
@@ -260,7 +265,7 @@ public:
      * @param prjDir - projection direction
      * @return projection matrix
      */
-    static GMatrix projection(const GPoint3D & plnPoint, const GVector3D & plnNormal, const GVector3D & prjDir);
+    static GMatrix4D projection(const GPoint3D & plnPoint, const GVector3D & plnNormal, const GVector3D & prjDir);
 
     /**
      * @brief Creates projection matrix
@@ -268,14 +273,20 @@ public:
      * @param plnNormal - projection plane normal
      * @return projection matrix
      */
-    static GMatrix projection(const GPoint3D & plnPoint, const GVector3D & plnNormal);
+    static GMatrix4D projection(const GPoint3D & plnPoint, const GVector3D & plnNormal);
 
 private:
     double m_pData[16];
 };
 
-SGL_API GMatrix operator*(const GMatrix & m1, const GMatrix & m2);
+/**
+ * @brief operator * for matrices
+ * @param m1 - left matrix
+ * @param m2 - right matrix
+ * @return Result matrix
+ */
+SGL_API GMatrix4D operator*(const GMatrix4D & m1, const GMatrix4D & m2);
 
 } //namespace sgl
 
-#endif //_GMATRIX_H_
+#endif //_GMATRIX4D_H_
