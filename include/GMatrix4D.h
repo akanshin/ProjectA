@@ -208,6 +208,20 @@ public:
     bool equals(const GMatrix4D & m, double tolerance = GTolerance::zeroTol());
 
     /**
+     * @brief Multiplies each matrix element by scalar
+     * @param scalar - scalar
+     * @return Reference to this matrix object
+     */
+    GMatrix4D & operator*=(double scalar);
+
+    /**
+     * @brief Divides each matrix element by scalar
+     * @param scalar - scalar
+     * @return Reference to this matrix object
+     */
+    GMatrix4D & operator/=(double scalar);
+
+    /**
      * @brief Creates translation matrix
      * @param v - translation vector
      * @return translation matrix
