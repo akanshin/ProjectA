@@ -28,7 +28,7 @@ namespace sgl
 {
 
 class GVector3D;
-class GMatrix;
+class GMatrix4D;
 
 /**
  * @brief 3D Point class for mathematical operations
@@ -194,7 +194,7 @@ public:
      * @param m - matrix
      * @return reference to this point object
      */
-    GPoint3D & operator*=(const GMatrix & m);
+    GPoint3D & operator*=(const GMatrix4D & m);
 
     /**
      * @brief Returns vector with the same coordinates
@@ -252,7 +252,7 @@ SGL_API GPoint3D operator-(const GPoint3D & pt, const GVector3D & v);
  * @param pt - point to transform
  * @return transformed copy of given point
  */
-SGL_API GPoint3D operator*(const GMatrix & m, const GPoint3D & pt);
+SGL_API GPoint3D operator*(const GMatrix4D & m, const GPoint3D & pt);
 
 } //namespace sgl
 

@@ -16,7 +16,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /////////////////////////////////////////////////////////////////////////
 
-#include "GMatrix.h"
+#include "GMatrix4D.h"
 #include "GPoint3D.h"
 #include "GVector3D.h"
 #include "GUtils.h"
@@ -200,10 +200,10 @@ TEST(GPoint3DTest, test_operatorMinusAssignVector)
 TEST(GPoint3DTest, test_operatorMultiplyAssignMatrix)
 {
     GPoint3D p{ 1.0, 2.0, 3.0 };
-    GMatrix m{ 1.0, 2.0, 3.0, 0.0,
-               2.0, 1.0, 4.0, 0.0,
-               3.0, 4.0, 1.0, 0.0,
-               5.0, 5.0, 5.0, 1.0 };
+    GMatrix4D m{ 1.0, 2.0, 3.0, 0.0,
+                 2.0, 1.0, 4.0, 0.0,
+                 3.0, 4.0, 1.0, 0.0,
+                 5.0, 5.0, 5.0, 1.0 };
     p *= m;
     ASSERT_TRUE(equal(p[0], 19.0));
     ASSERT_TRUE(equal(p[1], 21.0));
@@ -267,10 +267,10 @@ TEST(GPoint3DTest, test_operatorMinusVector)
 TEST(GPoint3DTest, test_operatorMultiplyMatrix)
 {
     GPoint3D p{ 1.0, 2.0, 3.0 };
-    GMatrix m{ 1.0, 2.0, 3.0, 0.0,
-               2.0, 1.0, 4.0, 0.0,
-               3.0, 4.0, 1.0, 0.0,
-               5.0, 5.0, 5.0, 1.0 };
+    GMatrix4D m{ 1.0, 2.0, 3.0, 0.0,
+                 2.0, 1.0, 4.0, 0.0,
+                 3.0, 4.0, 1.0, 0.0,
+                 5.0, 5.0, 5.0, 1.0 };
     GPoint3D r = m * p;
     ASSERT_TRUE(equal(r[0], 19.0));
     ASSERT_TRUE(equal(r[1], 21.0));

@@ -19,7 +19,7 @@
 #include "GPrecompiled.h"
 #include "GPoint3D.h"
 #include "GVector3D.h"
-#include "GMatrix.h"
+#include "GMatrix4D.h"
 #include "GUtils.h"
 
 namespace sgl
@@ -162,7 +162,7 @@ GPoint3D & GPoint3D::operator-=(const GVector3D & v)
     return *this;
 }
 
-GPoint3D & GPoint3D::operator*=(const GMatrix & m)
+GPoint3D & GPoint3D::operator*=(const GMatrix4D & m)
 {
     double x = m(0, 0) * m_x + m(1, 0) * m_y + m(2, 0) * m_z + m(3, 0);
     double y = m(0, 1) * m_x + m(1, 1) * m_y + m(2, 1) * m_z + m(3, 1);
@@ -201,7 +201,7 @@ GPoint3D operator-(const GPoint3D & pt, const GVector3D & v)
     return GPoint3D(pt.x() - v.x(), pt.y() - v.y(), pt.z() - v.z());
 }
 
-GPoint3D operator*(const GMatrix & m, const GPoint3D & pt)
+GPoint3D operator*(const GMatrix4D & m, const GPoint3D & pt)
 {
     GPoint3D res = pt;
     res *= m;
